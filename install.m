@@ -6,3 +6,4 @@ addpath(fullfile(eb_root,'check'));
 addpath(fullfile(eb_root,'proposal'));
 addpath(fullfile(eb_root,'visualize'));
 addpath(fullfile(eb_root,'initialize'));
+addpath(genpath('piotrToolbox'));
