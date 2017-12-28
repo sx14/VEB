@@ -1,5 +1,5 @@
-function show_hit(org_imgs,hit,proposals,ground_truth,org_height, org_width)
-ground_sum = size(hit,1);
+function show_hit(org_imgs,all_hit,proposals,ground_truth,org_height, org_width)
+ground_sum = size(all_hit,1);
 color_v = init_color(ground_sum);
 % 要显示ground truth将show_ground_truth设为false;
 show_ground_truth = true;
@@ -8,8 +8,9 @@ for f = 1:length(org_imgs)
     I = org_imgs{f};
     I = imresize(I,[org_height,org_width]);
     annotations_on_frame = ground_truth{f};
-    for h = 1:size(hit,1)
+    for h = 1:ground_sum
         annotation = annotations_on_frame(h);
+        hit = all_hit(h,size(all_hit,2),:);
         if ~isempty(annotation.id)   % 第f帧上没有第h个标注物体
             % =========== 画 ground truth =========
             if show_ground_truth
@@ -24,9 +25,9 @@ for f = 1:length(org_imgs)
         end
         
         % =========== 画 candidates ============
-        proposal_id = hit(h,1);
-        max_T_IoU = hit(h,2);
-        %         if cand ~= 0 && max_T_IoU > 0.5
+        proposal_id = hit(1);
+        max_T_IoU = hit(2);
+        %         if proposal_id ~= 0 && max_T_IoU > 0.5
         if proposal_id ~= 0
             proposal = proposals{proposal_id};
             boxes = proposal.boxes;
