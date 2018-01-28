@@ -59,7 +59,7 @@ for i = 1:size(bbs,1)
     h = bbs(i,4);
     if w < 5 || h < 5   % 框太小，tracker失败
         boxes = zeros(length(resized_imgs),4);
-        boxes(mid_frame+1,:) = [xmax, xmin, ymax, ymin];
+%         boxes(mid_frame+1,:) = [xmax, xmin, ymax, ymin];
     else
         [forward_positions] = run_tracker([video_path '/'], forward_frames, [y,x], [h,w]);
         [backword_positions] = run_tracker([video_path '/'], backward_frames, [y,x], [h,w]);
